@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}{{ hotel.name }} - SmartHotel{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>{{ hotel.name }}</h2>
+</div>
+
+<div class="hotel-info">
+    <p><strong>Location:</strong> {{ hotel.location }}</p>
+    <p><strong>Rating:</strong> {{ hotel.rating }}/5.0</p>
+</div>
+
+<h3>Rooms in this Hotel</h3>
+
+<!-- ANTI-PATTERN: No pagination, loads all rooms -->
+<table class="data-table">
+    <thead>
+        <tr>
+            <th>Room Number</th>
+            <th>Type</th>
+            <th>Price</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for room in rooms %}
+        <tr>
+            <td>{{ room.room_number }}</td>
+            <td>{{ room.room_type }}</td>
+            <td>${{ room.price }}</td>
+            <td><span class="status {{ room.status }}">{{ room.status }}</span></td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="4">No rooms found</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="/" class="btn">Back to Dashboard</a>
+
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Customer Management - SmartHotel{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>Customer Management</h2>
+    <a href="/customers/add" class="btn btn-primary">+ Add New Customer</a>
+</div>
+
+<!-- ANTI-PATTERN: No pagination, all customers loaded at once -->
+<table class="data-table">
+    <thead>
+        <tr>
+            <th>Customer ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th>Created Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for customer in customers %}
+        <tr>
+            <td>{{ customer.id }}</td>
+            <td>{{ customer.name }}</td>
+            <td>{{ customer.email }}</td>
+            <td>{{ customer.phone if customer.phone else 'N/A' }}</td>
+            <td>{{ customer.address if customer.address else 'N/A' }}</td>
+            <td>{{ customer.created_date }}</td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="6">No customers found</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<p style="margin-top: 20px; color: grey; font-size: 12px;">
+    Total Customers: {{ customers|length }} (No pagination - all loaded)
+</p>
+
+{% endblock %}

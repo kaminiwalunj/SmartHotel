@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Smart Hotel - Dashboard{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>Hotel Dashboard</h2>
+</div>
+
+<!-- ANTI-PATTERN: No filtering, sorting, or pagination -->
+<table class="data-table">
+    <thead>
+        <tr>
+            <th>Hotel ID</th>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Rating</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for hotel in hotels %}
+        <tr>
+            <td>{{ hotel.id }}</td>
+            <td>{{ hotel.name }}</td>
+            <td>{{ hotel.location }}</td>
+            <td>{{ hotel.rating }}/5.0</td>
+            <td>
+                <a href="/hotels/view/{{ hotel.id }}" class="link">View</a>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="5">No hotels found</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h3>Quick Stats</h3>
+<!-- ANTI-PATTERN: Stats hardcoded, not dynamic -->
+<ul>
+    <li>Total Hotels: {{ hotels|length }}</li>
+    <li>Last Updated: {{ now() if now else 'N/A' }}</li>
+</ul>
+
+{% endblock %}

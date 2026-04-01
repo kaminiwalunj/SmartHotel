@@ -1,0 +1,16 @@
+.git
+.gitignore
+.env
+.env.*
+*.md
+__pycache__
+*.pyc
+*.db
+*.sqlite3
+venv/
+.venv/
+.vscode/
+.idea/
+Dockerfile
+.dockerignore
+.azure/

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Room - SmartHotel{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>Edit Room #{{ room.id }}</h2>
+</div>
+
+<!-- ANTI-PATTERN: Weak validation, no optimistic locking -->
+<form method="POST" action="/rooms/edit/{{ room.id }}">
+    <div class="form-group">
+        <label for="room_number">Room Number:</label>
+        <input type="text" name="room_number" id="room_number" value="{{ room.room_number }}" required>
+    </div>
+
+    <div class="form-group">
+        <label for="room_type">Room Type:</label>
+        <select name="room_type" id="room_type" required>
+            <option value="Single" {% if room.room_type == 'Single' %}selected{% endif %}>Single</option>
+            <option value="Double" {% if room.room_type == 'Double' %}selected{% endif %}>Double</option>
+            <option value="Suite" {% if room.room_type == 'Suite' %}selected{% endif %}>Suite</option>
+            <option value="Deluxe" {% if room.room_type == 'Deluxe' %}selected{% endif %}>Deluxe</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="price">Price per Night:</label>
+        <input type="number" name="price" id="price" value="{{ room.price }}" step="0.01" required>
+    </div>
+
+    <div class="form-group">
+        <label for="status">Status:</label>
+        <select name="status" id="status" required>
+            <option value="available" {% if room.status == 'available' %}selected{% endif %}>Available</option>
+            <option value="booked" {% if room.status == 'booked' %}selected{% endif %}>Booked</option>
+            <option value="maintenance" {% if room.status == 'maintenance' %}selected{% endif %}>Maintenance</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update Room</button>
+    <a href="/rooms" class="btn">Cancel</a>
+</form>
+
+{% endblock %}

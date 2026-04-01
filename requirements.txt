@@ -1,0 +1,11 @@
+# Flask web framework
+Flask==3.0.0
+
+# Environment configuration management
+python-dotenv==1.0.0
+
+# Production WSGI server (for Azure App Service)
+gunicorn==21.2.0
+
+# Werkzeug — password hashing (generate_password_hash / check_password_hash)
+Werkzeug==3.0.0
