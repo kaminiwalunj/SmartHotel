@@ -7,9 +7,12 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_RESOURCE_GROUP: SmartHotelRG-2153209  # Update with your resource group name
-  AZURE_APP_SERVICE: SmartHotel   # Update with your app service name
-  AZURE_CONTAINER_REGISTRY: smarthotelacr  # Update with your ACR name
+  AZURE_RESOURCE_GROUP: SmartHotelRG-2153209      # Update with your resource group name
+
+  AZURE_APP_SERVICE: smarthotel               # Update with your app service name
+
+  AZURE_CONTAINER_REGISTRY: smarthotel         # Update with your ACR name
+
   IMAGE_NAME: smarthotel:latest
 
 jobs:
