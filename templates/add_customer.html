@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Add Customer - SmartHotel{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>Add New Customer</h2>
+</div>
+
+<!-- ANTI-PATTERN: No email validation, no duplicate checking -->
+<form method="POST" action="/customers/add">
+    <div class="form-group">
+        <label for="name">Full Name:</label>
+        <input type="text" name="name" id="name" required>
+    </div>
+
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" required>
+    </div>
+
+    <div class="form-group">
+        <label for="phone">Phone:</label>
+        <input type="tel" name="phone" id="phone">
+    </div>
+
+    <div class="form-group">
+        <label for="address">Address:</label>
+        <textarea name="address" id="address" rows="3"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add Customer</button>
+    <a href="/customers" class="btn">Cancel</a>
+</form>
+
+{% endblock %}

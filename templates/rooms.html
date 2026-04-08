@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Room Management - SmartHotel{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>Room Management</h2>
+    <a href="/rooms/add" class="btn btn-primary">+ Add New Room</a>
+</div>
+
+<!-- ANTI-PATTERN: No pagination, all rooms loaded at once -->
+<table class="data-table">
+    <thead>
+        <tr>
+            <th>Room ID</th>
+            <th>Hotel</th>
+            <th>Room Number</th>
+            <th>Type</th>
+            <th>Price</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for room in rooms %}
+        <tr>
+            <td>{{ room.id }}</td>
+            <td>{{ room.hotel_name }}</td>
+            <td>{{ room.room_number }}</td>
+            <td>{{ room.room_type }}</td>
+            <td>${{ room.price }}</td>
+            <td><span class="status {{ room.status }}">{{ room.status }}</span></td>
+            <td>
+                <a href="/rooms/edit/{{ room.id }}" class="link">Edit</a> |
+                <a href="/rooms/delete/{{ room.id }}" class="link danger" onclick="return confirm('Delete room?')">Delete</a>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="7">No rooms found</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<p style="margin-top: 20px; color: grey; font-size: 12px;">
+    Total Rooms: {{ rooms|length }} (No pagination - all loaded)
+</p>
+
+{% endblock %}

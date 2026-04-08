@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Create Booking - SmartHotel{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>Create New Booking</h2>
+</div>
+
+<!-- ANTI-PATTERN: No date validation, no conflict checking, no validation -->
+<form method="POST" action="/bookings/add">
+    <div class="form-group">
+        <label for="room_id">Room:</label>
+        <select name="room_id" id="room_id" required>
+            <option value="">Select a room</option>
+            {% for room in rooms %}
+            <option value="{{ room.id }}">
+                {{ room.hotel_name }} - Room {{ room.room_number }} ({{ room.room_type }}) - ${{ room.price }}/night
+            </option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="customer_name">Customer Name:</label>
+        <input type="text" name="customer_name" id="customer_name" required>
+    </div>
+
+    <div class="form-group">
+        <label for="customer_email">Customer Email:</label>
+        <input type="email" name="customer_email" id="customer_email">
+    </div>
+
+    <div class="form-group">
+        <label for="check_in_date">Check-in Date:</label>
+        <input type="date" name="check_in_date" id="check_in_date" required>
+    </div>
+
+    <div class="form-group">
+        <label for="check_out_date">Check-out Date:</label>
+        <input type="date" name="check_out_date" id="check_out_date" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create Booking</button>
+    <a href="/bookings" class="btn">Cancel</a>
+</form>
+
+<p style="margin-top: 20px; color: red; font-size: 12px;">
+    ⚠️ WARNING: No date validation. Overlapping bookings are NOT prevented.
+</p>
+
+{% endblock %}
